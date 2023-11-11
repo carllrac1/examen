@@ -13,7 +13,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        $productos = Producto::all();
+        $productos = Producto::with('imagenes')->get();
         return ProductosResource::collection($productos);
         
     }
