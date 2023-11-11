@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productos_imagens', function (Blueprint $table) {
+        Schema::create('productos_imagenes', function (Blueprint $table) {
             $table->id();
+            //foreign key producto_id
+            $table->foreignId('producto_id')->constrained('productos')->cascadeOnDelete();
+            $table->string('url');
             $table->timestamps();
         });
     }
