@@ -31,7 +31,7 @@ class ProductosController extends Controller
      */
     public function show(string $id)
     {
-        $producto = Producto::find($id);
+        $producto = Producto::with('imagenes')->findOrFail($id);
         return new ProductosResource($producto);
     }
 
