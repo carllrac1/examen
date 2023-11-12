@@ -39,6 +39,13 @@ class ProductosController extends Controller
     public function show(string $id)
     {
         $producto = Producto::with('imagenes')->findOrFail($id);
+
+        if (!$producto) {
+            return response()->json([
+                'message' => 'Producto no encontrado'
+            ], 404);
+        }
+
         return new ProductosResource($producto);
     }
 
