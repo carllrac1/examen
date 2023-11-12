@@ -11,11 +11,18 @@ class ProductosController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::with('imagenes')->get();
+        $productos = Producto::with('imagenes');
+
+        if ($request->has('q')) {
+            $productos = $productos->where('title','LIKE','%'. $request->get('q') .'%');
+        }
+
+        $productos = $productos->get();
+
         return ProductosResource::collection($productos);
-        
+
     }
 
     /**
