@@ -16,7 +16,7 @@ class ProductosImagenFactory extends Factory
     public function definition(): array
     {
         return [
-           'url' => $this->faker->imageUrl(),
+           'url' => $this->faker->imageUrl(1920,1080),
         ];
     }
 }
