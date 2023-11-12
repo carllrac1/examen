@@ -38,7 +38,7 @@ class ProductosController extends Controller
      */
     public function show(string $id)
     {
-        $producto = Producto::with('imagenes')->findOrFail($id);
+        $producto = Producto::with('imagenes')->find($id);
 
         if (!$producto) {
             return response()->json([
