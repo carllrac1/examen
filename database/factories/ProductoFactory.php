@@ -24,7 +24,7 @@ class ProductoFactory extends Factory
             'rating'=> $this->faker->numberBetween(0,10),
             'stock'=> $this->faker->numberBetween(0,100),
             'brand'=> $this->faker->word(),
-            'category' => $this->faker->word(),
+            'category' => $this->faker->randomElement(['computers','phones','tablets','tv','audio','cameras','videogames','smartwatches','accessories']),
             'thumbnail' => $this->faker->imageUrl(),
         ];
     }
