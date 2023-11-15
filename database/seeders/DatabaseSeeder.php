@@ -19,8 +19,29 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        \App\Models\Producto::factory(30)->has(
-            \App\Models\ProductosImagen::factory()->count(3), 'imagenes'
-        )->create();
+        $json = file_get_contents(public_path('products.json'));
+
+        $productos = json_decode($json, true);
+        
+        foreach ($productos['products'] as $key => $producto) {
+            $productoModel = \App\Models\Producto::factory()->create([
+                'description' => $producto['description'],
+                'price' => $producto['price'],
+                'discount_percentage' => $producto['discountPercentage'],
+                'rating' => $producto['rating'],
+                'stock' => $producto['stock'],
+                'brand' => $producto['brand'],
+                'category' => $producto['category'],
+                'thumbnail' => $producto['thumbnail'],
+                'title' => $producto['title'],
+            ]);
+
+            foreach ($producto['images'] as $imagen) {
+                \App\Models\ProductosImagen::factory()->create([
+                    'producto_id' => $productoModel->id,
+                    'url' => $imagen,
+                ]);
+            }
+        }
     }
 }
